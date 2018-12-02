@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST, VIEW_POST }  from './types';
+import { FETCH_POSTS, NEW_POST, VIEW_POST, UPDATE_POST }  from './types';
 
 export const fetchPosts = () => dispatch => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -19,6 +19,20 @@ export const createPost = (postData) => dispatch => {
     .then(res => res.json())
     .then(post => dispatch({
         type:NEW_POST,
+        payload: post
+    }));
+}
+export const updatePost = (postId, postData) => dispatch => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(FormData)
+    })
+    .then(res => res.json())
+    .then(post => dispatch({
+        type:UPDATE_POST,
         payload: post
     }));
 }

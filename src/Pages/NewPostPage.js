@@ -22,6 +22,7 @@ class NewPostPage extends Component {
             body:this.refs.body.value,
         };
         this.props.createPost(formData);
+        this.setState({ redirectToReferrer: true });
     }
 
     render(props) { 

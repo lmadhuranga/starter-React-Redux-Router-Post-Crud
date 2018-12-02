@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { appConfig } from '../config/globel.conf';
+import { connect } from 'react-redux';
+ 
 import { Redirect } from 'react-router-dom';
-
-const hostUrl = appConfig.company.host.url;
-const axios = require('axios');
+import { updatePost, fetchPost } from '../actions/postActions';
+ 
 
 class EditPostPage extends Component {
 
@@ -30,36 +30,20 @@ class EditPostPage extends Component {
     }
 
     handleSaveData(e) {
+        let postId = this.props.match.params.id;
         e.preventDefault();
-        axios.put(`${hostUrl}/${this.state.post.id}`, 
-            this.state.post
-        )
-        .then((result) => {
-                this.setState({ redirectToReferrer: true });
-            } 
-        )
-    }
-
-    getPost(postId) { 
-        axios.get(`${hostUrl}/${postId}`)
-        .then(
-          (result) => {
-              this.setState({post : result.data});
-          },          
-          (error) => {
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        ) 
+        this.props.updatePost(postId, this.state.post)
+        this.setState({ redirectToReferrer: true });
     }
 
     componentDidMount(){
         let postId = this.props.match.params.id;
-        this.getPost(postId)
+        this.props.fetchPost(postId)
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({post:props.post})
+    }
     render(props) { 
         let { from } = this.props.location.state || { from: { pathname: "/" } };
         let { redirectToReferrer } = this.state;
@@ -70,13 +54,16 @@ class EditPostPage extends Component {
             <div className="post-page">
                 <h1>Update {this.state.post.title} Post</h1>
                 <form onSubmit={this.handleSaveData.bind(this)}>
-                    <input type="text" ref="title" value={this.state.post.title} name="title" placeholder="Title" onChange={this.handleInput}/> <br/>
-                    <textarea cols='60' ref="body" value={this.state.post.body} name="body" placeholder="Content" onChange={this.handleInput}/> <br/>                     
+                    <input type="text" ref="title" defaultValue={this.state.post.title} name="title" placeholder="Title" onChange={this.handleInput}/> <br/>
+                    <textarea cols='60' ref="body" defaultValue={this.state.post.body} name="body" placeholder="Content" onChange={this.handleInput}/> <br/>                     
                     <button type="submit">Save </button>
                 </form>
             </div>
         );
         
     }
-}
-export default EditPostPage;
+} 
+const mapStateToprops = state => ({
+    post: state.posts.item
+})
+export default connect( mapStateToprops, { updatePost, fetchPost })(EditPostPage);
