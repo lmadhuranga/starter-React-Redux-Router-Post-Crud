@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions';
 import { Link } from 'react-router-dom';
 
-class PostsList extends Component {
+class ListPage extends Component {
 
   constructor(){
     super();
@@ -25,7 +25,7 @@ class PostsList extends Component {
     });
 
     return (
-      <div className="PostsList">
+      <div className="ListPage">
         <h1>Post Collection</h1>
         <ul>
           {postsItems}
@@ -35,10 +35,10 @@ class PostsList extends Component {
   }
 }
 
-// PostsList.propTypes = {
+// ListPage.propTypes = {
 //   title: PropTypes.string.isRequired,
 // };
 const mapStateToprops = state => ({
   posts: state.posts.items
 })
-export default connect( mapStateToprops, { fetchPosts })(PostsList);
+export default connect( mapStateToprops, { fetchPosts })(ListPage);

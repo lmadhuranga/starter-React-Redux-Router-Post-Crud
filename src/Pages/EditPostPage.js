@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
- 
-import { Redirect } from 'react-router-dom';
-import { updatePost, fetchPost } from '../actions/postActions';
+import { connect } from 'react-redux'; 
+import { create, update, fetchPost } from '../actions/postActions';
  
 
 class EditPostPage extends Component {
 
-    constructor(){
+    constructor(props){ 
         super(); 
         this.state = { 
             post: {
+                id: 0,
                 title:'',
+                body:'',
+                userId:'',
                 completed: false
-            },
-            redirectToReferrer: false
-        }
-
+            }  
+        } 
         this.handleInput = this.handleInput.bind(this)
     }
 
+    isUpdate(){
+        const { params } = this.props.match; 
+        return (params.id !== undefined) ? params.id : false;
+    } 
+    
     handleInput(event){
         event.preventDefault();
         let name = event.target.name;
@@ -29,33 +33,56 @@ class EditPostPage extends Component {
         }));
     }
 
+    redirect = (id=false) => { 
+        const { history } = this.props;
+        if(id) {
+            history.push(`/view/${id}`);
+        }
+        else {
+            history.push(`/`);
+        }
+    }
+    
     handleSaveData(e) {
-        let postId = this.props.match.params.id;
-        e.preventDefault();
-        this.props.updatePost(postId, this.state.post)
-        this.setState({ redirectToReferrer: true });
+        const postId = this.isUpdate(); 
+        let { post } = this.state;
+        if(postId){
+            e.preventDefault();
+            this.props.update(postId, post);
+            this.redirect(postId);
+        }
+        else {
+            e.preventDefault();
+            this.props.create(post);
+            this.redirect();
+        }
     }
 
     componentDidMount(){
-        let postId = this.props.match.params.id;
-        this.props.fetchPost(postId)
+        const postId = this.isUpdate();
+        console.log('postId',postId);
+        if(postId)
+            this.props.fetchPost(postId);
     }
 
     componentWillReceiveProps(props) {
-        this.setState({post:props.post})
+        this.setState({post:props.post});
     }
-    render(props) { 
-        let { from } = this.props.location.state || { from: { pathname: "/" } };
-        let { redirectToReferrer } = this.state;
-
-        if (redirectToReferrer) return <Redirect to={from} />;
-
+    render(props) {  
+        let { post } = this.state;
+        // Check data loaded only update page
+        if(post.id===0 && this.isUpdate())
+            return(<div>Loading...</div>);
+        let headLine = <h1 >Create Post</h1>;
+        if(this.isUpdate()) {
+            headLine = <h1 >Update { post.title } Post</h1>;
+        }
         return (
             <div className="post-page">
-                <h1>Update {this.state.post.title} Post</h1>
+                { headLine }
                 <form onSubmit={this.handleSaveData.bind(this)}>
-                    <input type="text" ref="title" defaultValue={this.state.post.title} name="title" placeholder="Title" onChange={this.handleInput}/> <br/>
-                    <textarea cols='60' ref="body" defaultValue={this.state.post.body} name="body" placeholder="Content" onChange={this.handleInput}/> <br/>                     
+                    <input type="text" ref="title" defaultValue={ post.title } name="title" placeholder="Title" onChange={this.handleInput}/> <br/>
+                    <input type="text" ref="body" defaultValue={ post.body } name="body" placeholder="Content" onChange={this.handleInput}/> <br/>                     
                     <button type="submit">Save </button>
                 </form>
             </div>
@@ -66,4 +93,4 @@ class EditPostPage extends Component {
 const mapStateToprops = state => ({
     post: state.posts.item
 })
-export default connect( mapStateToprops, { updatePost, fetchPost })(EditPostPage);
+export default connect( mapStateToprops, { create, update, fetchPost })(EditPostPage);

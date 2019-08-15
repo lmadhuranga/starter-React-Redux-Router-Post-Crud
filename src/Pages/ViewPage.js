@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchPost } from '../actions/postActions';
 
 
-class PostPage extends Component {
+class ViewPage extends Component {
 
   constructor(){
     super();
@@ -22,23 +22,27 @@ class PostPage extends Component {
     this.setState({post:props.post});
   }
 
-  render() { 
-     let editurl = `/edit/${this.state.post.id}`;
-     console.log('this.state',this.state);
+  render() {
+    const { post } = this.state;
+    let editurl = `/edit/${post.id}`;
+     
+    if(post.title===undefined)
+      return(<div>Loading...</div>);
+      
     return (
       <div className="post-page">
-        <h1>Post : {this.state.post.title} <Link to={editurl}>Edit</Link></h1>
-        <p>{this.state.post.body}</p>
+        <h1>Post : {post.title} <Link to={editurl}>Edit</Link></h1>
+        <p>{post.body}</p>
       </div>
     );
     
   }
 }
 
-// PostPage.propTypes = {
+// ViewPage.propTypes = {
 //   title: PropTypes.string.isRequired,
 // };
 const mapStateToprops = state => ({
   post: state.posts.item
 })
-export default connect( mapStateToprops, { fetchPost })(PostPage);
+export default connect( mapStateToprops, { fetchPost })(ViewPage);

@@ -6,7 +6,7 @@ const initialSate = {
 }
 
 export default function(state = initialSate, action) {
-    console.log('action',action.payload);
+    console.log('action',action.type ,action.payload);
     switch(action.type) {
         case FETCH_POSTS: 
             return {
