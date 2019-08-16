@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPost } from '../../redux/actions/postActions';
+import { moduleConfig } from './config';
 
 
 class ViewPage extends Component {
@@ -24,14 +25,14 @@ class ViewPage extends Component {
 
   render() {
     const { post } = this.state;
-    let editurl = `/edit/${post.id}`;
+    let editurl = `/${moduleConfig.url}/edit/${post.id}`;
      
     if(post.title===undefined)
       return(<div>Loading...</div>);
       
     return (
       <div className="post-page">
-        <h1>Post : {post.title} <Link to={editurl}>Edit</Link></h1>
+        <h1>Post : {post.title} <Link to={editurl}>Edit</Link> <Link to={`/${moduleConfig.url}`}>Back</Link></h1>
         <p>{post.body}</p>
       </div>
     );

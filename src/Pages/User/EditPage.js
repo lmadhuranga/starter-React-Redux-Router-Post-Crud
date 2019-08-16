@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
-import { create, update, fetchPost } from '../../redux/actions/postActions';
+import { create, update, fetchUser } from '../../redux/actions/userActions';
 import { moduleConfig } from './config'
 
 class EditPage extends Component {
@@ -8,11 +8,10 @@ class EditPage extends Component {
     constructor(props){ 
         super(); 
         this.state = { 
-            post: {
+            user: {
                 id: 0,
-                title:'',
-                body:'',
-                userId:'',
+                name:'',
+                email:'', 
                 completed: false
             }  
         } 
@@ -29,7 +28,7 @@ class EditPage extends Component {
         let name = event.target.name;
         let value = event.target.value; 
         this.setState( prevState => ({ 
-            post : { ...prevState.post, [name]: value }
+            user : { ...prevState.user, [name]: value }
         }));
     }
 
@@ -44,46 +43,46 @@ class EditPage extends Component {
     }
     
     handleSaveData(e) {
-        const postId = this.isUpdate(); 
-        let { post } = this.state;
-        if(postId){
+        const userId = this.isUpdate(); 
+        let { user } = this.state;
+        if(userId){
             e.preventDefault();
-            this.props.update(postId, post);
-            this.redirect(postId);
+            this.props.update(userId, user);
+            this.redirect(userId);
         }
         else {
             e.preventDefault();
-            this.props.create(post);
+            this.props.create(user);
             this.redirect();
         }
     }
 
     componentDidMount(){
-        const postId = this.isUpdate();
-        console.log('postId',postId);
-        if(postId)
-            this.props.fetchPost(postId);
+        const userId = this.isUpdate();
+        console.log('userId',userId);
+        if(userId)
+            this.props.fetchUser(userId);
     }
 
     componentWillReceiveProps(props) {
-        this.setState({post:props.post});
+        this.setState({user:props.user});
     }
 
     render(props) {  
-        let { post } = this.state;
+        let { user } = this.state;
         // Check data loaded only update page
-        if(post.id===0 && this.isUpdate())
+        if(user.id===0 && this.isUpdate())
             return(<div>Loading...</div>);
-        let headLine = <h1 >Create Post</h1>;
+        let headLine = <h1 >Create User</h1>;
         if(this.isUpdate()) {
-            headLine = <h1 >Update { post.title } Post</h1>;
+            headLine = <h1 >Update { user.name } User</h1>;
         }
         return (
-            <div className="post-page">
+            <div className="user-page">
                 { headLine }
                 <form onSubmit={this.handleSaveData.bind(this)}>
-                    <input type="text" ref="title" defaultValue={ post.title } name="title" placeholder="Title" onChange={this.handleInput}/> <br/>
-                    <input type="text" ref="body" defaultValue={ post.body } name="body" placeholder="Content" onChange={this.handleInput}/> <br/>                     
+                    <input type="text" ref="name" defaultValue={ user.name } name="name" placeholder="Title" onChange={this.handleInput}/> <br/>
+                    <input type="text" ref="email" defaultValue={ user.email } name="email" placeholder="Content" onChange={this.handleInput}/> <br/>                     
                     <button type="submit">Save </button>
                 </form>
             </div>
@@ -93,7 +92,7 @@ class EditPage extends Component {
 }
 
 const mapStateToprops = state => ({
-    post: state.posts.item
+    user: state.users.item
 });
 
-export default connect( mapStateToprops, { create, update, fetchPost })(EditPage);
+export default connect( mapStateToprops, { create, update, fetchUser })(EditPage);

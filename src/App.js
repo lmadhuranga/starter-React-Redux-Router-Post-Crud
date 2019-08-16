@@ -3,11 +3,16 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
  
-import ViewPage from './Pages/Post/ViewPage';
-import EditPage from './Pages/Post/EditPage';
-import ListPage from './Pages/Post/ListPage';
-import Navgation from './Pages/Navgation';
+import PostViewPage from './Pages/Post/ViewPage';
+import PostEditPage from './Pages/Post/EditPage';
+import PostListPage from './Pages/Post/ListPage';
+
+import UserViewPage from './Pages/User/ViewPage';
+import UserEditPage from './Pages/User/EditPage';
+import UserListPage from './Pages/User/ListPage';
+
 import Error from './Pages/Post/Error';
+import Navgation from './Pages/Navgation';
 
 class App extends Component {
  
@@ -19,10 +24,15 @@ class App extends Component {
           <div>
             <Navgation/>
             <Switch> 
-              <Route path='/' exact component={ListPage} />
-              <Route path='/view/:id' component={ViewPage} />
-              <Route path='/edit/:id' component={EditPage} />
-              <Route path='/edit' component={EditPage} />
+              <Route path='/post/' exact component={PostListPage} />
+              <Route path='/post/view/:id' component={PostViewPage} />
+              <Route path='/post/edit/:id' component={PostEditPage} />
+              <Route path='/post/edit' component={PostEditPage} />
+
+              <Route path='/user/' exact component={UserListPage} />
+              <Route path='/user/view/:id' component={UserViewPage} />
+              <Route path='/user/edit/:id' component={UserEditPage} />
+              <Route path='/user/edit' component={UserEditPage} />
               <Route  component={Error} />
             </Switch>
           </div>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts, deletePost} from '../../redux/actions/postActions';
 import { Link } from 'react-router-dom';
+import { moduleConfig } from './config';
 
 class ListPage extends Component { 
   
@@ -34,7 +35,7 @@ class ListPage extends Component {
     }
 
     let postsItems = posts.map((post)=>{
-      let url = `/view/${post.id}`;
+      let url = `/${moduleConfig.url}/view/${post.id}`;
       return (
         <li key={post.id}>
           <Link to={url} > {post.title} </Link>

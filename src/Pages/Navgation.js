@@ -3,13 +3,12 @@ import { NavLink } from 'react-router-dom';
  
 class Navgation extends Component {
   
-  render() {
-     
+  render() { 
     return (
       <div className="hunter">
         <NavLink to="/home">Home</NavLink> &nbsp;|&nbsp;
-        <NavLink to="/edit">New</NavLink> &nbsp;|&nbsp;
-        <NavLink to="/">Movies</NavLink>
+        <NavLink to="/user">Users</NavLink> &nbsp;|&nbsp;
+        <NavLink to="/post">Posts</NavLink> 
       </div>
     );
     

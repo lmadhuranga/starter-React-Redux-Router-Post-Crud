@@ -1,29 +1,29 @@
-import { FETCH_POSTS, NEW_POST, VIEW_POST, UPDATE_POST, DELETE_POST }  from './postTypes';
+import { FETCH_USERS, NEW_USER, VIEW_USER, UPDATE_USER, DELETE_USER }  from './userTypes';
 import { appConfig } from '../../config/globel.conf';
-const entity = 'posts';
+const entity = 'users';
 const entityUrl = `${appConfig.app.host.url}/${entity}`;
 
-export const fetchPosts = () => dispatch => {
+export const fetchUsers = () => dispatch => {
     fetch(`${entityUrl}`)
     .then(res => res.json())
-    .then(posts => dispatch({
-        type:FETCH_POSTS,
-        payload: posts
+    .then(users => dispatch({
+        type:FETCH_USERS,
+        payload: users
     }));
 }
 
 export const create = (formData) => dispatch => {
     fetch(`${entityUrl}`, {
-        method: 'POST',
+        method: 'USER',
         headers: {
             'content-type': 'application/json'
         },
         body: JSON.stringify(formData)
     })
     .then(res => res.json())
-    .then(post => dispatch({
-        type:NEW_POST,
-        payload: post
+    .then(user => dispatch({
+        type:NEW_USER,
+        payload: user
     })); 
 }
 
@@ -36,27 +36,27 @@ export const update = (id, formData) => dispatch => {
         body: JSON.stringify(formData)
     })
     .then(res => res.json())
-    .then(post => dispatch({
-        type:UPDATE_POST,
-        payload: post
+    .then(user => dispatch({
+        type:UPDATE_USER,
+        payload: user
     }));
 }
 
-export const fetchPost = (postId) => dispatch => { 
-    fetch(`${entityUrl}/${postId}`)
+export const fetchUser = (userId) => dispatch => { 
+    fetch(`${entityUrl}/${userId}`)
     .then(res => res.json())
-    .then(post => dispatch({
-        type: VIEW_POST,
-        payload: post
+    .then(user => dispatch({
+        type: VIEW_USER,
+        payload: user
     }));
 }
 
-export const deletePost = (id, formData) => dispatch => {
+export const deleteUser = (id, formData) => dispatch => {
     return fetch(`${entityUrl}/${id}`, {
         method: 'DELETE'
     })
-    .then(post => dispatch({
-        type:DELETE_POST,
+    .then(user => dispatch({
+        type:DELETE_USER,
         payload: "{}"
     }));
 }
