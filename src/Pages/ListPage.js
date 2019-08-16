@@ -1,14 +1,10 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/postActions';
+import { fetchPosts } from '../redux/actions/postActions';
 import { Link } from 'react-router-dom';
 
-class ListPage extends Component {
-
-  constructor(){
-    super(); 
-  }
+class ListPage extends Component { 
   
   componentDidMount() {
     this.props.fetchPosts();
