@@ -28,13 +28,17 @@ class ListPage extends Component {
   }
   
   render() {
-    const { posts } = this.props;
-
-    if(posts.length===0){
+    const { posts, limit } = this.props;
+    const recordsCount = posts.length; 
+    
+    if(recordsCount===0){
       return(<div>Loading.....</div>);
-    }
+    } 
 
-    let postsItems = posts.map((post)=>{
+    // if list defined only list last items only
+    const _limit = limit || recordsCount; 
+    
+    let postsItems = posts.slice((recordsCount - _limit), recordsCount).map((post)=>{
       let url = `/${moduleConfig.url}/view/${post.id}`;
       return (
         <li key={post.id}>

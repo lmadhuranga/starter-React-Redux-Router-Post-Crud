@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
  
+import HomePage from './Pages/Home/HomePage';
+
 import PostViewPage from './Pages/Post/ViewPage';
 import PostEditPage from './Pages/Post/EditPage';
 import PostListPage from './Pages/Post/ListPage';
@@ -24,6 +26,9 @@ class App extends Component {
           <div>
             <Navgation/>
             <Switch> 
+              <Route path='/' exact component={HomePage} />
+              <Route path='/home' component={HomePage} />
+              
               <Route path='/post/' exact component={PostListPage} />
               <Route path='/post/view/:id' component={PostViewPage} />
               <Route path='/post/edit/:id' component={PostEditPage} />
