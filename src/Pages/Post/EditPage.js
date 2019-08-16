@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
-import { create, update, fetchPost } from '../../redux/actions/postActions';
+import { create, update, fetchRecord } from '../../redux/actions/postActions';
 import { moduleConfig } from './config'
 
 class EditPage extends Component {
@@ -62,7 +62,7 @@ class EditPage extends Component {
         const postId = this.isUpdate();
         console.log('postId',postId);
         if(postId)
-            this.props.fetchPost(postId);
+            this.props.fetchRecord(postId);
     }
 
     componentWillReceiveProps(props) {
@@ -79,12 +79,18 @@ class EditPage extends Component {
             headLine = <h1 >Update { post.title } Post</h1>;
         }
         return (
-            <div className="post-page">
+            <div className="container post-page">
                 { headLine }
-                <form onSubmit={this.handleSaveData.bind(this)}>
-                    <input type="text" ref="title" defaultValue={ post.title } name="title" placeholder="Title" onChange={this.handleInput}/> <br/>
-                    <input type="text" ref="body" defaultValue={ post.body } name="body" placeholder="Content" onChange={this.handleInput}/> <br/>                     
-                    <button type="submit">Save </button>
+                <form className="" onSubmit={this.handleSaveData.bind(this)}>
+                    <div className="form-group">
+                        <label htmlFor="title"></label>
+                        <input className="form-control" type="text" ref="title" defaultValue={ post.title } name="title" placeholder="Title" onChange={this.handleInput}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="body"></label>
+                        <input className="form-control" type="text" ref="body" defaultValue={ post.body } name="body" placeholder="Content" onChange={this.handleInput}/> 
+                    </div>
+                    <button className="btn btn-primary btn-sm" type="submit">Save </button>
                 </form>
             </div>
         );
@@ -96,4 +102,4 @@ const mapStateToprops = state => ({
     post: state.posts.item
 });
 
-export default connect( mapStateToprops, { create, update, fetchPost })(EditPage);
+export default connect( mapStateToprops, { create, update, fetchRecord })(EditPage);

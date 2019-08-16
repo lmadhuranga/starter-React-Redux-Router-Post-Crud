@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUser } from '../../redux/actions/userActions';
+import { fetchRecord } from '../../redux/actions/userActions';
 import { moduleConfig } from './config';
 
 
@@ -16,7 +16,7 @@ class ViewPage extends Component {
 
   componentDidMount(props){
     let userId = this.props.match.params.id;
-    this.props.fetchUser(userId);    
+    this.props.fetchRecord(userId);    
   }
 
   componentWillReceiveProps(props){
@@ -31,9 +31,11 @@ class ViewPage extends Component {
       return(<div>Loading...</div>);
       
     return (
-      <div className="user-page">
-        <h1>User : {user.name} <Link to={editurl}>Edit</Link> <Link to={`/${moduleConfig.url}`}>Back</Link></h1>
+      <div className="container user-page">
+        <h1>User : {user.name}</h1>
         <p>{user.email}</p>
+        <Link className="btn btn-primary btn-sm" to={editurl}>Edit</Link> &nbsp;
+        <Link className="btn btn-primary btn-sm" to={`/${moduleConfig.url}`} > Back</Link>
       </div>
     );
     
@@ -47,4 +49,4 @@ const mapStateToprops = state => ({
   user: state.users.item
 });
 
-export default connect( mapStateToprops, { fetchUser })(ViewPage);
+export default connect( mapStateToprops, { fetchRecord })(ViewPage);

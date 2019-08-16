@@ -3,8 +3,8 @@ import { appConfig } from '../../config/globel.conf';
 const entity = 'users';
 const entityUrl = `${appConfig.app.host.url}/${entity}`;
 
-export const fetchUsers = () => dispatch => {
-    fetch(`${entityUrl}`)
+export const fetchRecords = () => dispatch => {
+    fetch(`${entityUrl}?_sort=id&_order=desc`)
     .then(res => res.json())
     .then(users => dispatch({
         type:FETCH_USERS,
@@ -42,7 +42,7 @@ export const update = (id, formData) => dispatch => {
     }));
 }
 
-export const fetchUser = (userId) => dispatch => { 
+export const fetchRecord = (userId) => dispatch => { 
     fetch(`${entityUrl}/${userId}`)
     .then(res => res.json())
     .then(user => dispatch({

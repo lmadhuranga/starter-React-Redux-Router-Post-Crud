@@ -1,9 +1,8 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts, deletePost} from '../../redux/actions/postActions';
-import { Link } from 'react-router-dom';
-import { appConfig } from '../../config/globel.conf';
+import { fetchRecords, deletePost} from '../../redux/actions/postActions'; 
+// import { appConfig } from '../../config/globel.conf';
 
 import PostListPage from '../Post/ListPage';
 import UserListPage from '../User/ListPage';
@@ -11,17 +10,17 @@ import UserListPage from '../User/ListPage';
 
 class HomePage extends Component { 
   
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
 
-  componentDidMount() {
-  }
+  // componentDidMount() {
+  // }
   
   render() {
     
     return (
-      <div className="HomePage">
+      <div className="container homePage">
         <h1>Home Page</h1>
         <UserListPage ></UserListPage>
         <PostListPage limit={10}></PostListPage>
@@ -39,7 +38,7 @@ const mapStateToprops = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: () => dispatch(fetchPosts()),
+    fetchRecords: () => dispatch(fetchRecords()),
     deletePost: (id) => dispatch(deletePost(id))
   }
 }

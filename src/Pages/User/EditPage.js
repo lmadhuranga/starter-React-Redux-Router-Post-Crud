@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
-import { create, update, fetchUser } from '../../redux/actions/userActions';
+import { create, update, fetchRecord } from '../../redux/actions/userActions';
 import { moduleConfig } from './config'
 
 class EditPage extends Component {
@@ -61,7 +61,7 @@ class EditPage extends Component {
         const userId = this.isUpdate();
         console.log('userId',userId);
         if(userId)
-            this.props.fetchUser(userId);
+            this.props.fetchRecord(userId);
     }
 
     componentWillReceiveProps(props) {
@@ -78,12 +78,16 @@ class EditPage extends Component {
             headLine = <h1 >Update { user.name } User</h1>;
         }
         return (
-            <div className="user-page">
+            <div className="container user-page">
                 { headLine }
                 <form onSubmit={this.handleSaveData.bind(this)}>
-                    <input type="text" ref="name" defaultValue={ user.name } name="name" placeholder="Title" onChange={this.handleInput}/> <br/>
-                    <input type="text" ref="email" defaultValue={ user.email } name="email" placeholder="Content" onChange={this.handleInput}/> <br/>                     
-                    <button type="submit">Save </button>
+                    <div className="form-group">
+                        <input className="form-control" type="text" ref="name" defaultValue={ user.name } name="name" placeholder="Title" onChange={this.handleInput}/> <br/>
+                    </div>
+                    <div className="form-group">
+                        <input className="form-control" type="text" ref="email" defaultValue={ user.email } name="email" placeholder="Content" onChange={this.handleInput}/> <br/>                     
+                    </div>
+                    <button className="btn btn-primary btn-sm" type="submit">Save </button>
                 </form>
             </div>
         );
@@ -95,4 +99,4 @@ const mapStateToprops = state => ({
     user: state.users.item
 });
 
-export default connect( mapStateToprops, { create, update, fetchUser })(EditPage);
+export default connect( mapStateToprops, { create, update, fetchRecord })(EditPage);

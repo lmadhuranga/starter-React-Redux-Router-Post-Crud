@@ -1,7 +1,7 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts, deletePost} from '../../redux/actions/postActions';
+import { fetchRecords, deletePost} from '../../redux/actions/postActions';
 import { Link } from 'react-router-dom';
 import { moduleConfig } from './config';
 
@@ -13,7 +13,7 @@ class ListPage extends Component {
   }
 
   getPosts() { 
-    this.props.fetchPosts();
+    this.props.fetchRecords();
   }
 
   deletePost(e, id) {
@@ -43,14 +43,17 @@ class ListPage extends Component {
       return (
         <li key={post.id}>
           <Link to={url} > {post.title} </Link>
-          <button className="btn btn-small btn-danger" onClick={(e) => this.deletePost(e, post.id)}>x</button>
+          <button className="btn btn-outline-danger btn-sm" onClick={(e) => this.deletePost(e, post.id)}>x</button>
         </li>
       );
     });
 
     return (
-      <div className="ListPage">
-        <h1>Post Collection</h1>
+      <div className="container ListPage">
+        <div className="row">
+          <h1>Post Collection</h1> &nbsp;
+          <Link className="btn btn-outline-info btn-sm" to={`/${moduleConfig.url}/edit`}>New</Link>
+        </div>
         <ul>
           {postsItems}
         </ul>
@@ -68,7 +71,7 @@ const mapStateToprops = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: () => dispatch(fetchPosts()),
+    fetchRecords: () => dispatch(fetchRecords()),
     deletePost: (id) => dispatch(deletePost(id))
   }
 }

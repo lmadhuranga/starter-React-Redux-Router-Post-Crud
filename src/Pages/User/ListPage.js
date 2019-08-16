@@ -1,7 +1,7 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUsers, deleteUser} from '../../redux/actions/userActions';
+import { fetchRecords, deleteUser} from '../../redux/actions/userActions';
 import { Link } from 'react-router-dom';
 import { moduleConfig } from './config';
 
@@ -13,7 +13,7 @@ class ListPage extends Component {
   }
 
   getUsers() { 
-    this.props.fetchUsers();
+    this.props.fetchRecords();
   }
 
   deleteUser(e, id) {
@@ -30,7 +30,7 @@ class ListPage extends Component {
   render() {
     const { users, limit } = this.props;
     const recordsCount = users.length;
-    
+
     if(recordsCount===0){
       return(<div>Loading.....</div>);
     }
@@ -42,14 +42,17 @@ class ListPage extends Component {
       return (
         <li key={user.id}>
           <Link to={url} > {user.name} </Link>
-          <button className="btn btn-small btn-danger" onClick={(e) => this.deleteUser(e, user.id)}>x</button>
+          <button className="btn btn-outline-danger btn-sm" onClick={(e) => this.deleteUser(e, user.id)}>x</button>
         </li>
       );
     });
 
     return (
-      <div className="ListPage">
-        <h1>User Collection</h1>
+      <div className="container ListPage">
+        <div className="row">
+          <h1>User Collection</h1>
+          <Link className="btn btn-outline-info btn-sm" to={`/${moduleConfig}/edit`}>New</Link>
+        </div>
         <ul>
           {usersItems}
         </ul>
@@ -67,7 +70,7 @@ const mapStateToprops = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUsers: () => dispatch(fetchUsers()),
+    fetchRecords: () => dispatch(fetchRecords()),
     deleteUser: (id) => dispatch(deleteUser(id))
   }
 }

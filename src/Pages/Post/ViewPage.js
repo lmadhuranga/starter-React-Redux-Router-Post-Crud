@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPost } from '../../redux/actions/postActions';
+import { fetchRecord } from '../../redux/actions/postActions';
 import { moduleConfig } from './config';
 
 
@@ -16,7 +16,7 @@ class ViewPage extends Component {
 
   componentDidMount(props){
     let postId = this.props.match.params.id;
-    this.props.fetchPost(postId);    
+    this.props.fetchRecord(postId);    
   }
 
   componentWillReceiveProps(props){
@@ -31,9 +31,11 @@ class ViewPage extends Component {
       return(<div>Loading...</div>);
       
     return (
-      <div className="post-page">
-        <h1>Post : {post.title} <Link to={editurl}>Edit</Link> <Link to={`/${moduleConfig.url}`}>Back</Link></h1>
+      <div className="container post-page">
+        <h1>Post : {post.title}</h1>
         <p>{post.body}</p>
+        <Link className="btn btn-primary btn-sm" to={editurl}>Edit</Link> &nbsp;
+        <Link className="btn btn-primary btn-sm" to={`/${moduleConfig.url}`} > Back</Link>
       </div>
     );
     
@@ -47,4 +49,4 @@ const mapStateToprops = state => ({
   post: state.posts.item
 });
 
-export default connect( mapStateToprops, { fetchPost })(ViewPage);
+export default connect( mapStateToprops, { fetchRecord })(ViewPage);
