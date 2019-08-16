@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { create, update, fetchPost } from '../actions/postActions';
  
 
-class EditPostPage extends Component {
+class EditPage extends Component {
 
     constructor(props){ 
         super(); 
@@ -68,6 +68,7 @@ class EditPostPage extends Component {
     componentWillReceiveProps(props) {
         this.setState({post:props.post});
     }
+
     render(props) {  
         let { post } = this.state;
         // Check data loaded only update page
@@ -89,8 +90,10 @@ class EditPostPage extends Component {
         );
         
     }
-} 
+}
+
 const mapStateToprops = state => ({
     post: state.posts.item
-})
-export default connect( mapStateToprops, { create, update, fetchPost })(EditPostPage);
+});
+
+export default connect( mapStateToprops, { create, update, fetchPost })(EditPage);

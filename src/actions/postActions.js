@@ -11,6 +11,7 @@ export const fetchPosts = () => dispatch => {
         payload: posts
     }));
 }
+
 export const create = (formData) => dispatch => {
     fetch(`${entityUrl}`, {
         method: 'POST',
@@ -25,6 +26,7 @@ export const create = (formData) => dispatch => {
         payload: post
     }));
 }
+
 export const update = (id, formData) => dispatch => {
     return fetch(`${entityUrl}/${id}`, {
         method: 'PUT',
@@ -40,8 +42,7 @@ export const update = (id, formData) => dispatch => {
     }));
 }
 
-export const fetchPost = (postId) => dispatch => {
-    console.log('postId',postId);
+export const fetchPost = (postId) => dispatch => { 
     fetch(`${entityUrl}/${postId}`)
     .then(res => res.json())
     .then(post => dispatch({

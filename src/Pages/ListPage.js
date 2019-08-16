@@ -7,10 +7,7 @@ import { Link } from 'react-router-dom';
 class ListPage extends Component {
 
   constructor(){
-    super();
-    this.state = { 
-      posts:[]
-    }
+    super(); 
   }
   
   componentDidMount() {
@@ -18,8 +15,13 @@ class ListPage extends Component {
   }
   
   render() {
-    console.log('this.props',this.state.posts);
-    let postsItems = this.props.posts.map((post)=>{
+    const { posts } = this.props;
+
+    if(posts.length===0){
+      return(<div>Loading.....</div>);
+    }
+
+    let postsItems = posts.map((post)=>{
       let url = `/view/${post.id}`;
       return <li key={post.id}> <Link to={url} > {post.title} </Link> </li>
     });
@@ -40,5 +42,6 @@ class ListPage extends Component {
 // };
 const mapStateToprops = state => ({
   posts: state.posts.items
-})
+});
+
 export default connect( mapStateToprops, { fetchPosts })(ListPage);
