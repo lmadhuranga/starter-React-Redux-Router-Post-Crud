@@ -9,6 +9,6 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
-To up fake json server 
+To up fake [json-server](https://www.npmjs.com/package/json-server) .
 
 ### `json-server -w db_post.json`
