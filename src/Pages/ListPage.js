@@ -1,13 +1,29 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../redux/actions/postActions';
+import { fetchPosts, deletePost} from '../redux/actions/postActions';
 import { Link } from 'react-router-dom';
 
 class ListPage extends Component { 
   
-  componentDidMount() {
+  constructor() {
+    super();
+    this.deletePost = this.deletePost.bind(this);
+  }
+
+  getPosts() { 
     this.props.fetchPosts();
+  }
+
+  deletePost(e, id) {
+    this.props.deletePost(id)
+    .then(()=> {
+      this.getPosts();
+    })
+  }
+
+  componentDidMount() {
+    this.getPosts();
   }
   
   render() {
@@ -19,7 +35,12 @@ class ListPage extends Component {
 
     let postsItems = posts.map((post)=>{
       let url = `/view/${post.id}`;
-      return <li key={post.id}> <Link to={url} > {post.title} </Link> </li>
+      return (
+        <li key={post.id}>
+          <Link to={url} > {post.title} </Link>
+          <button className="btn btn-small btn-danger" onClick={(e) => this.deletePost(e, post.id)}>x</button>
+        </li>
+      );
     });
 
     return (
@@ -40,4 +61,11 @@ const mapStateToprops = state => ({
   posts: state.posts.items
 });
 
-export default connect( mapStateToprops, { fetchPosts })(ListPage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(fetchPosts()),
+    deletePost: (id) => dispatch(deletePost(id))
+  }
+}
+
+export default connect( mapStateToprops, mapDispatchToProps)(ListPage);

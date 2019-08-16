@@ -44,5 +44,6 @@ class ViewPage extends Component {
 // };
 const mapStateToprops = state => ({
   post: state.posts.item
-})
+});
+
 export default connect( mapStateToprops, { fetchPost })(ViewPage);

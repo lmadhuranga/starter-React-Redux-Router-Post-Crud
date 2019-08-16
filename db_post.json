@@ -2,18 +2,6 @@
   "posts": [
     {
       "userId": 1,
-      "id": 2,
-      "title": "ffffsdfsdf",
-      "body": "aaasdf"
-    },
-    {
-      "userId": 1,
-      "id": 3,
-      "title": "ssss",
-      "body": "fff"
-    },
-    {
-      "userId": 1,
       "id": 4,
       "title": "eum et est occaecati",
       "body": "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
@@ -593,44 +581,6 @@
       "id": 100,
       "title": "at nam consequatur ea labore ea harum",
       "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
-    },
-    {
-      "title": "fff",
-      "body": "fff",
-      "id": 101
-    },
-    {
-      "title": "eee",
-      "body": "eee",
-      "id": 102
-    },
-    {
-      "id": 103,
-      "title": "ss",
-      "body": "sss",
-      "userId": "",
-      "completed": false
-    },
-    {
-      "id": 104,
-      "title": "sss",
-      "body": "sss",
-      "userId": "",
-      "completed": false
-    },
-    {
-      "id": 105,
-      "title": "ddd",
-      "body": "ddd",
-      "userId": "",
-      "completed": false
-    },
-    {
-      "id": 106,
-      "title": "sdf",
-      "body": "sss",
-      "userId": "",
-      "completed": false
     }
   ]
 }

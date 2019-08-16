@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST, VIEW_POST, UPDATE_POST }  from './types';
+import { FETCH_POSTS, NEW_POST, VIEW_POST, UPDATE_POST, DELETE_POST }  from './types';
 import { appConfig } from '../../config/globel.conf';
 const entity = 'posts';
 const entityUrl = `${appConfig.app.host.url}/${entity}`;
@@ -24,7 +24,7 @@ export const create = (formData) => dispatch => {
     .then(post => dispatch({
         type:NEW_POST,
         payload: post
-    }));
+    })); 
 }
 
 export const update = (id, formData) => dispatch => {
@@ -41,6 +41,7 @@ export const update = (id, formData) => dispatch => {
         payload: post
     }));
 }
+ 
 
 export const fetchPost = (postId) => dispatch => { 
     fetch(`${entityUrl}/${postId}`)
@@ -50,3 +51,14 @@ export const fetchPost = (postId) => dispatch => {
         payload: post
     }));
 }
+
+export const deletePost = (id, formData) => dispatch => {
+    return fetch(`${entityUrl}/${id}`, {
+        method: 'DELETE'
+    })
+    .then(post => dispatch({
+        type:DELETE_POST,
+        payload: "{}"
+    }));
+}
+ 
