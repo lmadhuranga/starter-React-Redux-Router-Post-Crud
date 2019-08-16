@@ -1,7 +1,7 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts, deletePost} from '../redux/actions/postActions';
+import { fetchPosts, deletePost} from '../../redux/actions/postActions';
 import { Link } from 'react-router-dom';
 
 class ListPage extends Component { 

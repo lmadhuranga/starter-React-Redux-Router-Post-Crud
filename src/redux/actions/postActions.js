@@ -41,7 +41,6 @@ export const update = (id, formData) => dispatch => {
         payload: post
     }));
 }
- 
 
 export const fetchPost = (postId) => dispatch => { 
     fetch(`${entityUrl}/${postId}`)

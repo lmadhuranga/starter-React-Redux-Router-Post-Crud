@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
  
-import ViewPage from './Pages/ViewPage';
-import EditPage from './Pages/EditPage';
-import ListPage from './Pages/ListPage';
+import ViewPage from './Pages/Post/ViewPage';
+import EditPage from './Pages/Post/EditPage';
+import ListPage from './Pages/Post/ListPage';
 import Navgation from './Pages/Navgation';
-import Error from './Pages/Error';
+import Error from './Pages/Post/Error';
 
 class App extends Component {
  
