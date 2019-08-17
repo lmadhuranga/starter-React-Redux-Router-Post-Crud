@@ -45,7 +45,7 @@ class EditPage extends Component {
     handleSaveData(e) {
         const userId = this.isUpdate(); 
         let { user } = this.state;
-        if(userId){
+        if(userId) {
             e.preventDefault();
             this.props.update(userId, user);
             this.redirect(userId);
@@ -64,7 +64,7 @@ class EditPage extends Component {
             this.props.fetchRecord(userId);
     }
 
-    componentWillReceiveProps(props) {
+    UNSAFE_componentWillReceiveProps(props) {
         this.setState({user:props.user});
     }
 

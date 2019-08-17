@@ -19,7 +19,7 @@ class ViewPage extends Component {
     this.props.fetchRecord(userId);    
   }
 
-  componentWillReceiveProps(props){
+  UNSAFE_componentWillReceiveProps(props){
     this.setState({user:props.user});
   }
 
