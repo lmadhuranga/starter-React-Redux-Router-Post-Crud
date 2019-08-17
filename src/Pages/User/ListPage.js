@@ -51,7 +51,7 @@ class ListPage extends Component {
       <div className="container ListPage">
         <div className="row">
           <h1>User Collection</h1>
-          <Link className="btn btn-outline-info btn-sm" to={`/${moduleConfig}/edit`}>New</Link>
+          <Link className="btn btn-outline-info btn-sm" to={`/${moduleConfig.url}/edit`}>New</Link>
         </div>
         <ul>
           {usersItems}

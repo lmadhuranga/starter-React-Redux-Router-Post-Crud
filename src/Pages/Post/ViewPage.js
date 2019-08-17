@@ -19,7 +19,7 @@ class ViewPage extends Component {
     this.props.fetchRecord(postId);    
   }
 
-  componentWillReceiveProps(props){
+  UNSAFE_componentWillReceiveProps(props){
     this.setState({post:props.post});
   }
 

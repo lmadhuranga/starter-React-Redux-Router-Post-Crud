@@ -13,14 +13,15 @@ export const fetchRecords = () => dispatch => {
 }
 
 export const create = (formData) => dispatch => {
+    delete formData['id']; 
     fetch(`${entityUrl}`, {
-        method: 'USER',
+        method: 'POST',
         headers: {
             'content-type': 'application/json'
         },
         body: JSON.stringify(formData)
     })
-    .then(res => res.json())
+    .then(res => res.json() )
     .then(user => dispatch({
         type:NEW_USER,
         payload: user
