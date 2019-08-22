@@ -1,7 +1,7 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRecords, deletePost} from '../../redux/actions/postActions'; 
+import { fetchRecords, deletePost} from '../../redux/post/actions'; 
 // import { appConfig } from '../../config/globel.conf';
 
 import PostListPage from '../Post/ListPage';

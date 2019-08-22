@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST, VIEW_POST, UPDATE_POST, DELETE_POST }  from './postTypes';
+import { FETCH_POSTS, NEW_POST, VIEW_POST, UPDATE_POST, DELETE_POST }  from './types';
 import { appConfig } from '../../config/globel.conf';
 const entity = 'posts';
 const entityUrl = `${appConfig.app.host.url}/${entity}`;

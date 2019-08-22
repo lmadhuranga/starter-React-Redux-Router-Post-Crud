@@ -1,4 +1,4 @@
-import { FETCH_USERS, NEW_USER, VIEW_USER, UPDATE_USER, DELETE_USER }  from './userTypes';
+import { FETCH_USERS, NEW_USER, VIEW_USER, UPDATE_USER, DELETE_USER }  from './types';
 import { appConfig } from '../../config/globel.conf';
 const entity = 'users';
 const entityUrl = `${appConfig.app.host.url}/${entity}`;

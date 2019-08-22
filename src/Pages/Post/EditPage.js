@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
-import { create, update, fetchRecord } from '../../redux/actions/postActions';
+import { create, update, fetchRecord } from '../../redux/post/actions';
 import { moduleConfig } from './config'
 
 class EditPage extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';   
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRecords, deleteUser} from '../../redux/actions/userActions';
+import { fetchRecords, deleteUser} from '../../redux/user/actions';
 import { Link } from 'react-router-dom';
 import { moduleConfig } from './config';
 
